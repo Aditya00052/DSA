@@ -1,5 +1,5 @@
-// Time Complexity = O(n); as we are traversing each node in the LL
-// Space Complexity = O(n); as we are storing each node in a vector
+// Time Complexity = O(n/2) = O(n); as fast is moving at double speed
+// Space Complexity = O(1); as we do not use any extra data structures(no vectors, no recursion)
 
 /**
  * Definition for singly-linked list.
@@ -14,16 +14,14 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
-        ListNode *temp = head;
-        vector<ListNode*> nodes;
+        ListNode *slow = head;
+        ListNode *fast = head;
 
-        while(temp != NULL){
-            nodes.push_back(temp);
-            temp = temp->next;
+        while(fast != NULL && fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
         }
 
-        int mid = floor(nodes.size() / 2);
-
-        return nodes[mid];
+        return slow;
     }
 };
